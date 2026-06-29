@@ -151,72 +151,62 @@ for(let i=0;i<40;i++){
 // Schedule Function
 async function schedule(){
 
-    let date=document.getElementById("date").value;
-    let time=document.getElementById("time").value;
-    let place=document.getElementById("place").value;
+let date=document.getElementById("date").value;
+let time=document.getElementById("time").value;
+let place=document.getElementById("place").value;
 
-    if(date=="" || time=="" || place==""){
+if(date=="" || time=="" || place==""){
 
-        alert("Thlang vek rawh ❤️");
+alert("Thlang vek rawh ❤️");
 
-        return;
-    }
-
-    try{
-
-        await fetch("/answer",{
-
-            method:"POST",
-
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body:JSON.stringify({
-
-                answer:"YES",
-
-                date:date,
-
-                time:time,
-
-                place:place
-
-            })
-
-        });
-
-    }catch(err){
-
-        console.log("Server not connected.");
-    }
-
-    document.getElementById("result").innerHTML=
-
-    `
-    <h2>❤️ MUAH ❤️</h2>
-
-    <p>Ka hmu chak tawh lutuk che. 😊</p>
-
-    <hr>
-
-    <h3>🥰 Kan leng hun</h3>
-
-    <p>📅 <b>${date}</b></p>
-
-    <p>🕒 <b>${time}</b></p>
-
-    <p>📍 <b>${place}</b></p>
-
-    <br>
-
-    <p style="font-size:22px;">
-    Ka nghakhlel hle mai ❤️🥰
-    </p>
-    `;
+return;
 
 }
-</script>
 
-</body>
-</html>
+try{
+
+await addDoc(collection(db,"responses"),{
+
+answer:"YES",
+
+date:date,
+
+time:time,
+
+place:place,
+
+created:new Date()
+
+});
+
+document.getElementById("result").innerHTML=`
+
+<h2>❤️ MUAH ❤️</h2>
+
+<p>Ka hmu chak tawh lutuk che ❤️</p>
+
+<hr>
+
+<h3>🥰 Kan leng hun</h3>
+
+<p>📅 ${date}</p>
+
+<p>🕒 ${time}</p>
+
+<p>📍 ${place}</p>
+
+<br>
+
+<b>Ka nghakhlel hle mai che ❤️</b>
+
+`;
+
+}catch(e){
+
+alert("Something went wrong.");
+
+console.log(e);
+
+}
+
+}
