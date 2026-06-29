@@ -1,0 +1,9 @@
+
+body{margin:0;font-family:Arial;background:linear-gradient(45deg,#ff8fb1,#ffd6e7);overflow:hidden}
+.center{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;text-align:center;color:#fff}
+.btn{padding:15px 30px;margin:10px;border:none;border-radius:30px;font-size:20px;cursor:pointer}
+.yes{background:#ff2d55;color:#fff}
+.no{background:#fff;color:#ff2d55;position:absolute}
+.heart{position:fixed;color:#fff;animation:float 8s linear infinite}
+@keyframes float{from{transform:translateY(110vh)}to{transform:translateY(-10vh)}}
+h1{font-size:48px} p{font-size:22px}

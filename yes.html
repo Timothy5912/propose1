@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>zindawn ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
+}
+
+.container{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    width:420px;
+    max-width:90%;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    z-index:10;
+}
+
+h1{
+    color:#ff2d55;
+    margin-bottom:15px;
+}
+
+h2{
+    color:#ff2d55;
+    margin-bottom:15px;
+}
+
+p{
+    margin-bottom:20px;
+    color:#555;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:2px solid #ffb6c1;
+    border-radius:10px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:30px;
+    background:#ff2d55;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+    background:#ff1744;
+}
+
+#result{
+    margin-top:20px;
+    color:#ff2d55;
+    font-size:18px;
+}
+
+.heart{
+    position:absolute;
+    color:white;
+    animation:float linear infinite;
+    pointer-events:none;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(110vh);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-120vh);
+        opacity:0;
+    }
+}
+
+hr{
+    margin:20px 0;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>❤️ A rawn zin dawn nia. ❤️</h1>
+
+<p>Kut beng ve ula 🥰</p>
+
+<h2>Engtikah nge kan leng ang?</h2>
+
+<input type="date" id="date">
+
+<input type="time" id="time">
+
+<input type="text" id="place" placeholder="Khawi hmunah nge ni ang?">
+
+<button onclick="schedule()">Sawi chiang la... ❤️</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+// Floating Hearts
+for(let i=0;i<40;i++){
+
+    let heart=document.createElement("div");
+
+    heart.className="heart";
+
+    heart.innerHTML="❤️";
+
+    heart.style.left=Math.random()*100+"vw";
+
+    heart.style.fontSize=(20+Math.random()*25)+"px";
+
+    heart.style.animationDuration=(5+Math.random()*5)+"s";
+
+    document.body.appendChild(heart);
+
+}
+
+// Schedule Function
+async function schedule(){
+
+    let date=document.getElementById("date").value;
+    let time=document.getElementById("time").value;
+    let place=document.getElementById("place").value;
+
+    if(date=="" || time=="" || place==""){
+
+        alert("Thlang vek rawh ❤️");
+
+        return;
+    }
+
+    try{
+
+        await fetch("/answer",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+
+                answer:"YES",
+
+                date:date,
+
+                time:time,
+
+                place:place
+
+            })
+
+        });
+
+    }catch(err){
+
+        console.log("Server not connected.");
+    }
+
+    document.getElementById("result").innerHTML=
+
+    `
+    <h2>❤️ MUAH ❤️</h2>
+
+    <p>Ka hmu chak tawh lutuk che. 😊</p>
+
+    <hr>
+
+    <h3>🥰 Kan leng hun</h3>
+
+    <p>📅 <b>${date}</b></p>
+
+    <p>🕒 <b>${time}</b></p>
+
+    <p>📍 <b>${place}</b></p>
+
+    <br>
+
+    <p style="font-size:22px;">
+    Ka nghakhlel hle mai ❤️🥰
+    </p>
+    `;
+
+}
+</script>
+
+</body>
+</html>
